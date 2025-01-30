@@ -13,26 +13,13 @@ connect.then(() => {
     console.log("some error occured");
 })
 
-// const userSchema = new mongoose.Schema({
-//     username: {
-//         type: String,
-//         unique: true
-//     },
-//     password: {
-//         type: String,
-//     }
-// });
-
-// var UserModel = mongoose.model('User', userSchema);
-
-
 
 // User Interface
 interface IUser extends Document {
   username: string;
-  email: string;
+  // email: string;
   password: string; // Hashed password
-  createdAt: Date;
+  // createdAt: Date;
 }
 
 // Car Interface
@@ -53,9 +40,7 @@ interface ICar extends Document {
 // User Schema
 const userSchema = new Schema<IUser>({
   username: { type: String, required: true, unique: true },
-  // email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }, // Hashed password
-  // createdAt: { type: Date, default: Date.now },
+  password: { type: String, required: true, minlength: 8}, 
 });
 
 // Car Schema
