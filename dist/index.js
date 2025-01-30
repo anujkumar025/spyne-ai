@@ -19,16 +19,11 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const multer_1 = __importDefault(require("multer"));
 const middleware_1 = require("./middleware");
 const cors_1 = __importDefault(require("cors"));
-const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
-const swagger_output_json_1 = __importDefault(require("./swagger_output.json"));
 dotenv_1.default.config();
 const PORT = process.env.PORT;
 const JWT_PASSWORD = process.env.JWT_PASSWORD;
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)({
-    origin: 'http://localhost:3000', // Your client origin
-    credentials: true
-}));
+app.use((0, cors_1.default)());
 // Add this to your Express app setup
 if (!JWT_PASSWORD) {
     throw new Error("JWT_PASSWORD is not defined in environment variables.");
@@ -45,7 +40,6 @@ const upload = (0, multer_1.default)({
 });
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
-app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_output_json_1.default));
 app.post("/api/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const username = req.body.username;
     const password = req.body.password;

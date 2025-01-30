@@ -20,10 +20,7 @@ dotenv.config();
 const PORT = process.env.PORT;
 const JWT_PASSWORD = process.env.JWT_PASSWORD;
 const app = express();
-app.use(cors({
-  origin: 'http://localhost:3000', // Your client origin
-  credentials: true
-}));
+app.use(cors());
 // Add this to your Express app setup
 
 if (!JWT_PASSWORD) {
